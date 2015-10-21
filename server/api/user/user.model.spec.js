@@ -6,6 +6,8 @@ var User = require('./user.model');
 
 var user = new User({
   provider: 'local',
+  city: "Perth",
+  state: "Western Australia",
   name: 'Fake User',
   email: 'test@test.com',
   password: 'password'

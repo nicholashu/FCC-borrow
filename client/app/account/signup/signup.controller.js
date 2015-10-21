@@ -11,6 +11,9 @@ angular.module('tradeAppApp')
       if(form.$valid) {
         Auth.createUser({
           name: $scope.user.name,
+          city: $scope.user.city,
+          state: $scope.user.city,
+          country: $scope.user.country,
           email: $scope.user.email,
           password: $scope.user.password
         })

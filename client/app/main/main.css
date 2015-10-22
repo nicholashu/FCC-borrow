@@ -8,6 +8,8 @@ body{
 #banner {
     border-bottom: none;
     margin-top: -20px;
+    height: 50vh;
+    padding-top: 8%;
 }
 
 #banner h1 {

@@ -8,11 +8,16 @@ angular.module('tradeAppApp')
      $scope.getCurrentUser = Auth.getCurrentUser;
      $scope.recordId = $routeParams.id;
 
-    $http.get('/api/records').success(function(records) {
+    var getRecords = function(){
+      $http.get('/api/records').success(function(records) {
       $scope.Records = records;
-      socket.syncUpdates('record', $scope.Records);
     }); 
+      socket.syncUpdates('record', $scope.Records);
+    }
+    
+    getRecords();
 
+    //Get individual record (SINGLE RECORD PAGE)
     $scope.getRecord = function(id){
       $http.get('/api/records/' + id).success(function(record) {
       $scope.currentRecord = record;
@@ -20,8 +25,15 @@ angular.module('tradeAppApp')
       }); 
     };
 
-    $scope.borrowRecord = function(){
-
+    //function to set loaner of record
+    $scope.borrowRecord = function(id){
+      var taker = $scope.getCurrentUser().name;
+      console.log(taker)
+      $http.patch('/api/records/' + id,{loaner:taker}).success(function(records) {
+        console.log(records)
+      $scope.currentRecord = records;
+      socket.syncUpdates('record', $scope.Records);
+      }); 
     };
 
     $scope.addThing = function() {
@@ -44,6 +56,24 @@ angular.module('tradeAppApp')
     $scope.isOwner = function(record) {
       var user = $scope.getCurrentUser();
       if(record.owner === user.name){
+        return true;
+      }else{
+        return false;
+      };
+    };
+
+    $scope.cantBorrow = function(record) {
+      var user = $scope.getCurrentUser();
+      if(record.loaner !== undefined || record.owner !== user.name){
+        return true;
+      }else{
+        return false;
+      };
+    };
+
+
+    $scope.isAvailable = function(record) {
+      if(record.loaner === undefined || record.loaner === ""){
         return true;
       }else{
         return false;

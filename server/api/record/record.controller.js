@@ -42,6 +42,7 @@ exports.update = function(req, res) {
   });
 };
 
+
 // Deletes a record from the DB.
 exports.destroy = function(req, res) {
   Record.findById(req.params.id, function (err, record) {

@@ -9,7 +9,7 @@ angular.module('tradeAppApp')
     $http.get('/api/records').success(function(records) {
       $scope.Records = records;
       socket.syncUpdates('record', $scope.Records);
-    });
+    }); 
 
     $scope.addThing = function() {
       var user = $scope.getCurrentUser();

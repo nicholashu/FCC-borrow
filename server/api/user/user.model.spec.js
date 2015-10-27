@@ -8,6 +8,7 @@ var user = new User({
   provider: 'local',
   city: "Perth",
   state: "Western Australia",
+  country: "Australia"
   name: 'Fake User',
   email: 'test@test.com',
   password: 'password'

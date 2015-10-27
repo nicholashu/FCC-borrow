@@ -6,7 +6,8 @@ angular.module('tradeAppApp', [
   'ngSanitize',
   'ngRoute',
   'btford.socket-io',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ui.gravatar'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider

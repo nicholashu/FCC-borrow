@@ -12,7 +12,7 @@ angular.module('tradeAppApp')
         Auth.createUser({
           name: $scope.user.name,
           city: $scope.user.city,
-          state: $scope.user.city,
+          state: $scope.user.state,
           country: $scope.user.country,
           email: $scope.user.email,
           password: $scope.user.password

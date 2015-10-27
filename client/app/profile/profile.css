@@ -1,0 +1,21 @@
+.profile-image {
+	border-radius: 50%;
+	width: 80px;
+	float:right;
+	position: inherit;
+  top: -60px;
+}
+
+.page-header {
+    /padding-bottom: 9px;
+    /* margin: 40px 0 20px; */
+     border-bottom: 0px solid #eee; 
+}
+
+
+
+
+
+.page-header h1{
+    margin-top: 25px;
+}

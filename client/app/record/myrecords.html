@@ -2,7 +2,7 @@
 <div class="container recordlist">
   <div class="row">
     <div class="col-lg-12">
-      <h1 class="page-header">My Records:</h1>
+      <h1 class="">My Records:</h1>
       <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="record in Records">
         <li ng-show="isOwner(record)"><a href="#" tooltip="{{thing.info}}">{{record.album}}-{{record.artist}}<button type="button" class="close" ng-click="deleteThing(record)">&times;</button></a>condition:{{record.condition}}<br>description:{{record.description}}</li>
       </ul>

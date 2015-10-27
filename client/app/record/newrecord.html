@@ -1,0 +1,16 @@
+ <div ng-include="'components/navbar/navbar.html'"></div>
+ <div class="container">
+ <form class="thing-form">
+    <label>Syncs in realtime across clients</label>
+       {{newRecord}}
+    <p class="input-group">
+      <input type="text" class="form-control" placeholder="Album" ng-model="newRecord.album">
+      <input type="text" class="form-control" placeholder="Artist" ng-model="newRecord.artist">
+      <input type="text" class="form-control" placeholder="Condition" ng-model="newRecord.condition">
+      <input type="text" class="form-control" placeholder="Description" ng-model="newRecord.description">
+    </p>
+          <span class="input-group-btn">
+        <button type="submit" class="btn btn-primary" ng-click="addThing()">Add New</button>
+      </span>
+  </form>
+  </div>

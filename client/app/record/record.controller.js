@@ -1,15 +1,28 @@
 'use strict';
 
 angular.module('tradeAppApp')
-  .controller('RecordCtrl', function ($scope, Auth, $http, socket, $window) {
+  .controller('RecordCtrl', function ($scope, Auth, $http, socket, $window,$routeParams) {
      $scope.Records = [];
+     $scope.currentRecord = [];
      $scope.newRecord = {};
      $scope.getCurrentUser = Auth.getCurrentUser;
+     $scope.recordId = $routeParams.id;
 
     $http.get('/api/records').success(function(records) {
       $scope.Records = records;
       socket.syncUpdates('record', $scope.Records);
     }); 
+
+    $scope.getRecord = function(id){
+      $http.get('/api/records/' + id).success(function(record) {
+      $scope.currentRecord = record;
+      socket.syncUpdates('record', $scope.currentRecord);
+      }); 
+    };
+
+    $scope.borrowRecord = function(){
+
+    };
 
     $scope.addThing = function() {
       var user = $scope.getCurrentUser();

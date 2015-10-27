@@ -8,7 +8,7 @@
       <h4 class="">{{getCurrentUser().city}},{{getCurrentUser().state}}, {{getCurrentUser().country}}</h4>
       <hr>
       <ul class="col-md-4 col-lg-4 col-sm-6" ng-repeat="record in Records">
-        <li>{{record.album}} - {{record.artist}}<br>Condition:{{record.condition}}<br>Description:{{record.description}}</li>
+        <li>{{record.album}} - {{record.artist}}<button type="button" class="close" ng-click="deleteThing(record)">&times;</button><br>Condition:{{record.condition}}<br>Description:{{record.description}}</li>
       </ul>
     </div>
     </div>

@@ -9,6 +9,10 @@ angular.module('tradeAppApp')
       .when('/newrecord', {
         templateUrl: 'app/record/newrecord.html',
         controller: 'RecordCtrl'})
+      .when('/r/:id', {
+        templateUrl: 'app/record/recordpage.html',
+        controller: 'RecordCtrl'
+      })
       .when('/myrecords', {
         templateUrl: 'app/record/myrecords.html',
         controller: 'RecordCtrl'

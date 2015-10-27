@@ -11,7 +11,8 @@
     <div class="col-lg-12">
       <h1 class="page-header">Records:</h1>
       <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="record in Records">
-        <li><a href="#" tooltip="{{thing.info}}">{{record.album}}-{{record.artist}}<button type="button" class="close" ng-click="deleteThing(record)">&times;</button></a>condition:{{record.condition}}<br>description:{{record.description}}</li>
+        <li><a href="/r/{{record._id}}">{{record.album}}-{{record.artist}}</a>condition:{{record.condition}}<br>description:{{record.description}}</li>
+        <button class="btn btn-primary" ng-click="borrowRecord">Borrow</button>
       </ul>
     </div>
   </div>

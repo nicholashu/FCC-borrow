@@ -8,14 +8,27 @@ angular.module('tradeAppApp')
      $scope.getCurrentUser = Auth.getCurrentUser;
      $scope.recordId = $routeParams.id;
 
-    var getRecords = function(){
-      $http.get('/api/records').success(function(records) {
-      $scope.Records = records;
-    }); 
-      socket.syncUpdates('record', $scope.Records);
-    }
     
-    getRecords();
+
+
+
+    function getRecords(records){
+      records.forEach(function(record){
+             $scope.Records.push(record);
+      });
+     }
+
+    function loadRecords(){
+      $http.get('/api/records').success(function(records) {
+      getRecords(records);
+    }); 
+      socket.syncUpdates('records', $scope.Records);
+    }
+
+
+    
+    loadRecords();
+
 
     //Get individual record (SINGLE RECORD PAGE)
     $scope.getRecord = function(id){
@@ -28,12 +41,19 @@ angular.module('tradeAppApp')
     //function to set loaner of record
     $scope.borrowRecord = function(id){
       var taker = $scope.getCurrentUser().name;
-      console.log(taker)
       $http.patch('/api/records/' + id,{loaner:taker}).success(function(records) {
-        console.log(records)
       $scope.currentRecord = records;
-      socket.syncUpdates('record', $scope.Records);
       }); 
+      socket.syncUpdates('record', $scope.Records);
+    };
+
+     //function to cancel loaner of record
+    $scope.cancelBorrow = function(id){
+      var taker = "";
+      $http.patch('/api/records/' + id,{loaner:taker}).success(function(record) {
+      $scope.currentRecord = record;
+      });
+      socket.syncUpdates('record', $scope.Records); 
     };
 
     $scope.addThing = function() {
@@ -64,16 +84,18 @@ angular.module('tradeAppApp')
 
     $scope.cantBorrow = function(record) {
       var user = $scope.getCurrentUser();
-      if(record.loaner !== undefined || record.owner !== user.name){
+      if(record.owner == user.name || record.loaner !== undefined || record.loaner !== ""){
         return true;
       }else{
         return false;
       };
     };
 
-
+    var x = 0;
     $scope.isAvailable = function(record) {
-      if(record.loaner === undefined || record.loaner === ""){
+      x++
+      console.log(x)
+      if(record.loaner === ""){
         return true;
       }else{
         return false;

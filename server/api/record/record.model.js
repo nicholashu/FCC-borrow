@@ -11,7 +11,11 @@ var RecordSchema = new Schema({
   owner: String,
   loaner: String,
   info: String,
-  active: Boolean
+  active: Boolean,
+  approved:{ 
+  type: Boolean,
+  default: false
+	}
 });
 
 module.exports = mongoose.model('Record', RecordSchema);

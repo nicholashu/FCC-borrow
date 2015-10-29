@@ -67,7 +67,8 @@ angular.module('tradeAppApp')
        album: $scope.newRecord.album,
        condition: $scope.newRecord.condition,
        description: $scope.newRecord.description,
-       owner: user.name
+       owner: user.name,
+       loaner: ""
      });
       $scope.newRecord = {};
       $window.location.href = '/myrecords';
@@ -84,20 +85,31 @@ angular.module('tradeAppApp')
 
     $scope.cantBorrow = function(record) {
       var user = $scope.getCurrentUser();
-      if(record.owner == user.name || record.loaner !== undefined || record.loaner !== ""){
-        return true;
-      }else{
+      if(record.loaner !== ""){
+        if (record.owner === user.name){
+          return false;
+        }else{
+          return true;
+        }
+      }
+      else{
         return false;
       };
     };
 
-    var x = 0;
+    //show if not owner, has "" or undefined, 
     $scope.isAvailable = function(record) {
-      x++
-      console.log(x)
-      if(record.loaner === ""){
+      var user = $scope.getCurrentUser();
+      if(record.owner !== user.name){
+        if (record.loaner !== ""){
+          return false;
+        }else{
+          return true;
+        } 
+      }else if(record.loaner !== ""){
         return true;
-      }else{
+      }
+      else{
         return false;
       };
     };

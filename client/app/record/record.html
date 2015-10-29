@@ -12,9 +12,10 @@
       <h1 class="page-header">Records:</h1>
       <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="record in Records">
         <li><a href="/r/{{record._id}}">{{record.album}}-{{record.artist}}</a>condition:{{record.condition}}<br>description:{{record.description}}</li>
+        <button class="btn btn-warning" ng-show="isOwner(record)">Owner</button>
         <button class="btn btn-primary" ng-click="borrowRecord(record._id)"  ng-show="isAvailable(record)">Borrow</button>
-        <button class="btn btn-success" ng-show="cantBorrow(record)" ng-hide="isAvailable(record)">Loaned</button>
-        <button class="btn btn-danger" ng-show="cantBorrow(record)" ng-click="cancelBorrow(record._id)" ng-hide="isAvailable(record)">Cancel</button>
+        <button class="btn btn-success" ng-show="cantBorrow(record)">Loaned</button>
+        <button class="btn btn-danger" ng-show="cantBorrow(record)" ng-click="cancelBorrow(record._id)">Cancel</button>
       </ul>
     </div>
   </div>

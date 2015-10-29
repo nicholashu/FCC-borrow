@@ -77,17 +77,15 @@ angular.module('tradeAppApp')
      //function to cancel loaner of record
     $scope.cancelBorrow = function(id){
       var taker = "";
-      $http.patch('/api/records/' + id,{loaner:taker}).success(function(record) {
-      $scope.currentRecord = record;
-      });
+      $http.patch('/api/records/' + id,{loaner:taker, approved:false});
       socket.syncUpdates('record', $scope.Records); 
+      socket.syncUpdates('record', $scope.onLoan);
     };
-
+    //TODO:refresh on button click
      $scope.approveRecord = function(id){
-      $http.patch('/api/records/' + id,{approved:true}).success(function(record) {
-      $scope.currentRecord = record;
-      });
-      socket.syncUpdates('record', $scope.Records); 
+      $http.patch('/api/records/' + id,{approved:true}).then(function(){
+        socket.syncUpdates($scope.awaitingApproval); 
+      })
     };
 
     $scope.addThing = function() {
